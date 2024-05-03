@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<launch>
+  <env name="ROSCONSOLE_CONFIG_FILE" value="$(find vrx_gazebo)/config/custom_rosconsole.conf"/>
+  <!-- Gazebo world to load -->
+  <arg name="world" default="$(find iris_coastline)/worlds/iris_coastline.world" />
+  <!-- If true, run gazebo GUI -->
+  <arg name="gui" default="true" />
+  <!-- If true, run gazebo in verbose mode -->
+  <arg name="verbose" default="false"/>
+  <!-- If true, start in paused state -->
+  <arg name="paused"  default="false"/>
+  <!-- Set various other gazebo arguments-->
+  <arg name="extra_gazebo_args" default=""/>
+  <!-- Start in a default namespace -->
+  <arg name="namespace" default="wamv"/>
+
+  <!-- Initial UGV location and attitude-->
+  <arg name="xx" default="189.8" />
+  <arg name="yy" default="150" />
+  <arg name="zz" default="4" />
+  <arg name="P" default="0" />
+  <arg name="R" default="0" />
+  <arg name="Y" default="0" />
+
+  <!-- If true, show non-competition ROS topics (/gazebo/model_states, /vrx/debug/wind/direction, etc.)-->
+  <arg name="non_competition_mode" default="true"/>
+  <arg name="enable_ros_network" value="$(arg non_competition_mode)"/>
+  <env name="VRX_DEBUG" value="$(arg non_competition_mode)"/>
+  <env unless="$(arg non_competition_mode)" name="GAZEBO_MODEL_PATH" value="$(find vrx_gazebo)/models:$(find wamv_gazebo)/models:$(find wamv_description)/models:$(optenv GAZEBO_MODEL_PATH)"/>
+
+  <!-- Allow user specified thruster configurations
+       H = stern trusters on each hull
+       T = H with a lateral thruster
+       X = "holonomic" configuration -->
+  <arg name="thrust_config" default="H" />
+
+  <!-- Do you want to enable sensors? -->
+  <arg name="camera_enabled"       default="false" />
+  <arg name="gps_enabled"          default="false" />
+  <arg name="imu_enabled"          default="false" />
+  <arg name="lidar_enabled"        default="false" />
+  <arg name="ground_truth_enabled" default="false" />
+
+  <!-- Start Gazebo with the world file -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name"   value="$(arg world)"/>
+    <arg name="verbose"      value="$(arg verbose)"/>
+    <arg name="paused"       value="$(arg paused)"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui"          value="$(arg gui)" />
+    <arg name="enable_ros_network" value="$(arg enable_ros_network)"/>
+    <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args)"/>
+  </include>
+             
+      <!-- Resume the logic in empty_world.launch, over-riding a number of arguments -->
+          <arg name="robot_name" default="iris_demo" />
+          <arg name="x_iris" default="188.17" />
+          <arg name="y_iris" default="150" />
+          <arg name="z_iris" default="4" />
+          <arg name="roll_iris" default="0.0" />
+          <arg name="pitch_iris" default="0.0" />
+          <arg name="yaw_iris" default="0" />
+           <arg name="sdf_robot_file" default="/home/flam/ardupilot_gazebo/models/iris_with_ardupilot_and_zed_stereocamera/model.sdf" />
+      
+      <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 -0.14 0 1.57 0 base_link iris_demo/left_camera_optical_frame 100" />
+
+      <node name="$(arg robot_name)_spawn_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" output ="screen" 
+      args="-file $(arg sdf_robot_file) -sdf -x $(arg x_iris) -y $(arg y_iris) -z $(arg z_iris) -R $(arg roll_iris) -P $(arg pitch_iris) -Y $(arg yaw_iris) 
+      -model $(arg robot_name)"/>
+
+  <include file="$(find husky_gazebo)/launch/spawn_husky.launch">
+   <arg name="x" value="$(arg xx)"/>
+   <arg name="y" value="$(arg yy)"/>
+   <arg name="z" value="$(arg zz)"/>
+   <arg name="yaw" value="$(arg Y)"/>
+  </include>
+
+   
+</launch>
+
