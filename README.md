@@ -89,8 +89,34 @@ Now launch a world file with a copter/rover/plane and ardupilot plugin, and it s
 
 <h2>First</h2>
 File: iris_coastline.launch Inside the iris_coastline package. In the line 86 you change the path of the model.sdf launched inside the script
-arg name="sdf_robot_file" default="/home/$USER$/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/models/iris_with_ardupilot_and_zed_stereocamera/model.sdf"
- 
+
+```
+<arg name="sdf_robot_file" default="/home/$USER$/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/models/iris_with_ardupilot_and_zed_stereocamera/model.sdf"/>
+```
+
 <h2>Second</h2>
 File spawn_drone.launch Inside the iris_gazebo package. In the line 13 change the path for the model.sdf file launched inside the script.
-arg name="sdf_robot_file" default="/home/$USER$/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/models/iris_with_lidar/model.sdf"
+
+```
+<arg name="sdf_robot_file" default="/home/$USER$/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/models/iris_with_lidar/model.sdf"/>
+```
+<h1>Usage</h1>
+
+Initial launch of the world
+```
+$ cd ~/catkin_ws/
+$ source devel/setup.bash
+$ roslaunch iris_coastline iris_coastline.launch
+```
+Open a second terminal and launch SITL through the scripts file in the repo:
+```
+$ cd ~/ardupilot/ArduCopter/
+$ sim_vehicle.py --mavproxy-args="--streamrate=30" --console --map -v ArduCopter -f gazebo-iris
+```
+Open a third terminal and launch mavros:
+```
+$ cd ~/catkin_ws
+$ source devel/setup.bash
+$ roslaunch mavros apm.launch
+```
+These three terminals launch the sandislad world with the iris quadcopter, the SITL (both communication, telemetry, console and map) and the mavros communcations. If everyhting are launched succesfuly then you will have topics both from the ZED stereo camera.
