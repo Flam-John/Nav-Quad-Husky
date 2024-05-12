@@ -86,13 +86,11 @@ Install is complete
 Now launch a world file with a copter/rover/plane and ardupilot plugin, and it should work!
 
 <h1>Demanding script changes</h1>
+
 <h2>First</h2>
 File: iris_coastline.launch Inside the iris_coastline package. In the line 86 you change the path of the model.sdf launched inside the script
-```
-<arg name="sdf_robot_file" default="/home/$USER$/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/models/iris_with_ardupilot_and_zed_stereocamera/model.sdf" />
-```
- <h2>Second</h2>
+arg name="sdf_robot_file" default="/home/$USER$/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/models/iris_with_ardupilot_and_zed_stereocamera/model.sdf"
+ 
+<h2>Second</h2>
 File spawn_drone.launch Inside the iris_gazebo package. In the line 13 change the path for the model.sdf file launched inside the script.
-```
-<arg name="sdf_robot_file" default="/home/$USER$/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/models/iris_with_lidar/model.sdf" /> 
-```
+arg name="sdf_robot_file" default="/home/$USER$/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/models/iris_with_lidar/model.sdf"
