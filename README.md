@@ -8,7 +8,7 @@ Before continuing with the packages explanation you should have install the Ardu
 
 <H1>Packages explanation</H1>
 <H2>Ardupilot_gazebo</H2>
-The following plugin is a pure Gazebo plugin, so ROS is not needed to use it. You can still use ROS with Gazebo with normal gazebo-ros packages. It is based on the ArduPilot documentation (https://ardupilot.org/dev/docs/using-gazebo-simulator-with-sitl.html). </n> The current package is a combination of the basic ardupilot_gazebo packages:
+The following plugin is a pure Gazebo plugin, so ROS is not needed to use it. You can still use ROS with Gazebo with normal gazebo-ros packages. It is based on the ArduPilot documentation (https://ardupilot.org/dev/docs/using-gazebo-simulator-with-sitl.html). The current package is a combination of the basic ardupilot_gazebo packages:
 https://github.com/khancyr/ardupilot_gazebo
 https://github.com/SwiftGust/ardupilot_gazebo
 with some new and modified models according to the simulator's use. Recommendation to study the Using Gazebo Simulator with SITL tutorial and then installing the present ardupilot_gazebo package in this repository.
