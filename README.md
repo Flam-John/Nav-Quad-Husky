@@ -35,9 +35,10 @@ $ cd ~/catkin_ws
 $ catkin_make
 After the the workspace is ready, clone the repository:
 ```
+
 ```
 $ cd ~/catkin_ws/src
-$ git clone https://github.com/sotomotocross/UAV_simulator_ArduCopter.git
+$ git clone https://github.com/$USER$/UAV_simulator_ArduCopter.git
 $ git clone https://github.com/HBPNeurorobotics/gazebo_dvs_plugin.git
 $ git clone https://github.com/uzh-rpg/rpg_dvs_ros.git
 $ git clone https://github.com/catkin/catkin_simple.git
