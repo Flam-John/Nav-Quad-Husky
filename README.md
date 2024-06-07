@@ -17,10 +17,10 @@ with some new and modified models according to the simulator's use. Recommendati
 MAVLink extendable communication node for ROS. Modification made based on the original package (https://github.com/mavlink/mavros) in order to adapt it to our needs.
 
 <H2>Iris_coastline</H2>
-Package launching the modified vrx world with an iris quadcopter featuring a ZED stereo camera, ArduCopter and MAVROS communications.
+Package launching the modified vrx world with an iris quadcopter featuring a ZED stereo camera, a Husky UGV featuring an Aruko marker, ArduCopter and MAVROS communications.
 
-<H2>Iris_gazebo and Iris_navigation</H2>
-Packages created for a 2D navigation demo of the quadcopter featuring obstacle avoidance while using the move_base (https://wiki.ros.org/move_base) ROS package and Hokuyo Lidar.
+<H2>Position Based Visual Servoing</H2>
+Position based visual servoing is a control algorithm used in robot vision to automatically adjust the position of a robot or camera based on the results of image analysis. The algorithm uses the position information derived from the image analysis to suggest and adjust the desired motion of the robot or camera (https://en.wikipedia.org/wiki/Visual_servoing)
 
 <h1>Install</h1>
 Create a catkin workspace with the following commands:
