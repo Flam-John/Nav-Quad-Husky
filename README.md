@@ -170,4 +170,4 @@ This code is a program for controlling the robot to move to some specific coordi
 2) The program in which the motion controller runs controller ```./husky_motion_controller.py ```
 
 
-These three terminals launch the sandislad world with the iris quadcopter, the SITL (both communication, telemetry, console and map) and the mavros communcations. If everyhting are launched succesfuly then you will have topics both from the ZED stereo camera.
+These terminals launch the sandislad world with the iris quadcopter, the Husky with the Aruco Marker, the SITL (both communication, telemetry, console and map) and the mavros communcations. If everyhting are launched succesfuly then you will have topics both from the ZED stereo camera.
