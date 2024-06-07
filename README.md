@@ -105,17 +105,17 @@ File spawn_drone.launch Inside the iris_gazebo package. In the line 13 change th
 
 1rst terminal (Start the world with robots):
 
-1) (move to the folder where the world iris_coastline.launch is located) ``` cd ~/simulator_ws  ```
+1) Move to the folder where the world iris_coastline.launch is located ``` cd ~/simulator_ws  ```
 
-2) (declare the address in the terminal with the source prefix) ``` source devel/setup.bash  ```
+2) Declare the address in the terminal with the source prefix ``` source devel/setup.bash  ```
    
-3) (start the iris_coastline.launch startup which is in the package iris_coastline package with the roslaunch option) ``` roslaunch iris_coastline iris_coastline.launch ```
+3) Start the iris_coastline.launch startup which is in the package iris_coastline package with the roslaunch option ``` roslaunch iris_coastline iris_coastline.launch ```
 
 2nd terminal (Start SITL) :
 
 1) move to the folder where the start of the autopilot of the quadrotor. ``` cd ~/ardupilot/ArduCopter/ ```
 
-2) (gazebo-iris : the quadrotor's model, ArduCopter: in the folder where quadrotor is in, --mavproxy-args="--streamrate=30: messages that sent at a frequency of 30 hz, sim_vehicle.py: the python program that the autopilot runs. ``` sim_vehicle.py --mavproxy-args="--streamrate=30" -console --map -v ArduCopter -f gazebo-iris ```
+2) gazebo-iris : the quadrotor's model, ArduCopter: in the folder where quadrotor is in, --mavproxy-args="--streamrate=30: messages that sent at a frequency of 30 hz, sim_vehicle.py: The python program that the autopilot runs. ``` sim_vehicle.py --mavproxy-args="--streamrate=30" -console --map -v ArduCopter -f gazebo-iris ```
 
 3rd terminal (Start MAVROS):
 
@@ -123,8 +123,7 @@ File spawn_drone.launch Inside the iris_gazebo package. In the line 13 change th
 
 2) declare the address in the terminal with the source prefix ```source devel/setup.bash ```
 
-3) (start the apm.launch startup found in the mavros package with
-roslaunch command) ```roslaunch mavros apm.launch```
+3) Start the apm.launch startup found in the mavros package with roslaunch command ```roslaunch mavros apm.launch```
 
 2nd terminal (control mavlink to raise the quadrotor).
 
@@ -148,15 +147,27 @@ Takeoff: This command takes off the quadrotor at an altitude equal to the number
 to be entered in the parameter.
 
 4th terminal (Start Detection Aruco Marker):
-1) (Calls the aruco_detect.launch primitive found in the package aruco_detect package with the roslaunch prefix) ```roslaunch aruco_detect aruco_detect.launch```
+1) Calls the aruco_detect.launch primitive found in the package aruco_detect package with the roslaunch prefix ```roslaunch aruco_detect aruco_detect.launch```
 
 
 5th terminal (Observation of Aruco Marker from the Rviz):
-1) (Calls the fiducial_rviz.launch header found in the package fiducial_slam with the roslaunch option and opens rviz) ```roslaunch fiducial_slam fiducial_rviz.launch```
+1) Calls the fiducial_rviz.launch header found in the package fiducial_slam with the roslaunch option and opens rviz ```roslaunch fiducial_slam fiducial_rviz.launch```
 
 6th terminal (Autopilot Visual control node):
-1) (move to the directory that we need) ```cd simulator_ws/src/simulator/scripts ```
-2) (the program in which the controller runs) ```./visual_servoing.py```
+1) Move to the directory that we need ```cd simulator_ws/src/simulator/scripts ```
+2) The program in which the controller runs ```./visual_servoing.py```
+
+A) 7th terminal (TELEOP movement of the husky):
+
+1) Move to the directory we need ```cd simulator_ws/src/Husky/husky_control/scripts```
+2) Manipulate husky with the keyboard ```./teleop_keyboard.py```
+
+B) 7th terminal (motion controller of the husky):
+
+This code is a program for controlling the robot to move to some specific coordinates. It uses ROS to communicate with Husky and receive the robot's odometry data. The code installs a ROS node and sets up a listener for the odometry data coming from the "/odometry/filtered" topic. Each time an odometry message is received, the callback function is called. In the callback function, the heading data (x, y, yaw) are retrieved from the odometry message. The robot's distance from a target (fixed values in the code) and the angle of motion to reach the next target are then calculated. The calculated linear and angular velocity values (u and w) are used to assign velocities to Husky via the "/cmd_vel" topic. This allows Husky to move towards the target. The process is repeated until the robot reaches the final target, at which point the program will terminate.
+
+1) Move to the directory that we need ```cd simulator_ws/src/simulator/scripts```
+2) The program in which the motion controller runs controller ```./husky_motion_controller.py ```
 
 
 These three terminals launch the sandislad world with the iris quadcopter, the SITL (both communication, telemetry, console and map) and the mavros communcations. If everyhting are launched succesfuly then you will have topics both from the ZED stereo camera.
