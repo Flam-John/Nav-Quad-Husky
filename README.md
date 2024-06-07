@@ -105,32 +105,47 @@ File spawn_drone.launch Inside the iris_gazebo package. In the line 13 change th
 
 1rst terminal (Start the world with robots):
 
-1) (move to the folder where the world iris_coastline.launch is located)
-   ``` cd ~/simulator_ws  ```
+1) (move to the folder where the world iris_coastline.launch is located) ``` cd ~/simulator_ws  ```
 
-3) (declare the address in the terminal with the source prefix)
-   ``` source devel/setup.bash  ```
- ` 
-5) (start the iris_coastline.launch startup which is in the package iris_coastline package with the roslaunch option)
-``` roslaunch iris_coastline iris_coastline.launch ```
+2) (declare the address in the terminal with the source prefix) ``` source devel/setup.bash  ```
+   
+3) (start the iris_coastline.launch startup which is in the package iris_coastline package with the roslaunch option) ``` roslaunch iris_coastline iris_coastline.launch ```
 
 2nd terminal (Start SITL) :
 
-1) move to the folder where the start of the autopilot of the quadrotor
-``` cd ~/ardupilot/ArduCopter/ ```
+1) move to the folder where the start of the autopilot of the quadrotor. ``` cd ~/ardupilot/ArduCopter/ ```
 
-2) (gazebo-iris : the quadrotor's model, ArduCopter: in the folder where quadrotor is in, --mavproxy-args="--streamrate=30: messages that sent at a frequency of 30 hz, sim_vehicle.py: the python program that the autopilot runs.
-``` sim_vehicle.py --mavproxy-args="--streamrate=30" -console --map -v ArduCopter -f gazebo-iris ```
+2) (gazebo-iris : the quadrotor's model, ArduCopter: in the folder where quadrotor is in, --mavproxy-args="--streamrate=30: messages that sent at a frequency of 30 hz, sim_vehicle.py: the python program that the autopilot runs. ``` sim_vehicle.py --mavproxy-args="--streamrate=30" -console --map -v ArduCopter -f gazebo-iris ```
 
 3rd terminal (Start MAVROS):
 
-1) move to the folder where the mavros root is located
-   ``` cd ~/csl_uav_simulator_ws ```
+1) move to the folder where the mavros root is located ``` cd ~/csl_uav_simulator_ws ```
 
-3) source devel/setup.bash
-(declare the address in the terminal with the source prefix)
-4) roslaunch mavros apm.launch
-(start the apm.launch startup found in the mavros package with
-roslaunch command)
+2) declare the address in the terminal with the source prefix ```source devel/setup.bash ```
+
+3) (start the apm.launch startup found in the mavros package with
+roslaunch command) ```roslaunch mavros apm.launch```
+
+4rth terminal (control mavlink to raise the quadrotor).
+
+1) ``` mode GUIDED ```
+mode Guided: This is used for applications where precise control is required.
+control of the flight, such as in drones (used for
+exploration, surveillance, aerial photography, videography, video surveillance, and surveillance missions
+and others).
+
+First we wait for the GPS to be activated and then we wait for the
+that we can arm it.
+
+2) ``` Arm throttle ```
+Arm throttle: Activates the drone's motors and allows the drone to
+drone to take off. When the "arm throttle" command is executed, the drone
+the drone enters wake-up mode and is ready to take off as soon as the
+the user gives the take-off command.
+
+3)``` Takeoff (3-4)```
+Takeoff: This command takes off the quadrotor at an altitude equal to the number
+to be entered in the parameter.
+
 
 These three terminals launch the sandislad world with the iris quadcopter, the SITL (both communication, telemetry, console and map) and the mavros communcations. If everyhting are launched succesfuly then you will have topics both from the ZED stereo camera.
