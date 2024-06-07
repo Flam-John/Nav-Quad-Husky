@@ -16,9 +16,6 @@ with some new and modified models according to the simulator's use. Recommendati
 <H2>Mavros</H2>
 MAVLink extendable communication node for ROS. Modification made based on the original package (https://github.com/mavlink/mavros) in order to adapt it to our needs.
 
-<H2>Usb_cam</H2>
-A ROS driver for V4L USB cameras. In the simulator's case it can be used to extract image information from the ZED stereo camera mounted on our iris quadcopter. Source code: https://github.com/ros-drivers/usb_cam (modifications were made).
-
 <H2>Iris_coastline</H2>
 Package launching the modified vrx world with an iris quadcopter featuring a ZED stereo camera, ArduCopter and MAVROS communications.
 
