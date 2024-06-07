@@ -126,9 +126,9 @@ File spawn_drone.launch Inside the iris_gazebo package. In the line 13 change th
 3) (start the apm.launch startup found in the mavros package with
 roslaunch command) ```roslaunch mavros apm.launch```
 
-4rth terminal (control mavlink to raise the quadrotor).
+2nd terminal (control mavlink to raise the quadrotor).
 
-1) ``` mode GUIDED ```
+1) ```mode GUIDED```
 mode Guided: This is used for applications where precise control is required.
 control of the flight, such as in drones (used for
 exploration, surveillance, aerial photography, videography, video surveillance, and surveillance missions
@@ -137,15 +137,26 @@ and others).
 First we wait for the GPS to be activated and then we wait for the
 that we can arm it.
 
-2) ``` Arm throttle ```
+2) ```Arm throttle```
 Arm throttle: Activates the drone's motors and allows the drone to
 drone to take off. When the "arm throttle" command is executed, the drone
 the drone enters wake-up mode and is ready to take off as soon as the
 the user gives the take-off command.
 
-3)``` Takeoff (3-4)```
+3) ```Takeoff (3-4)```
 Takeoff: This command takes off the quadrotor at an altitude equal to the number
 to be entered in the parameter.
+
+4th terminal (Start Detection Aruco Marker):
+1) (Calls the aruco_detect.launch primitive found in the package aruco_detect package with the roslaunch prefix) ```roslaunch aruco_detect aruco_detect.launch```
+
+
+5th terminal (Observation of Aruco Marker from the Rviz):
+1) (Calls the fiducial_rviz.launch header found in the package fiducial_slam with the roslaunch option and opens rviz) ```roslaunch fiducial_slam fiducial_rviz.launch```
+
+6th terminal (Autopilot Visual control node):
+1) (move to the directory that we need) ```cd simulator_ws/src/simulator/scripts ```
+2) (the program in which the controller runs) ```./visual_servoing.py```
 
 
 These three terminals launch the sandislad world with the iris quadcopter, the SITL (both communication, telemetry, console and map) and the mavros communcations. If everyhting are launched succesfuly then you will have topics both from the ZED stereo camera.
