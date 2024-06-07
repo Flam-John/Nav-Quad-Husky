@@ -103,21 +103,34 @@ File spawn_drone.launch Inside the iris_gazebo package. In the line 13 change th
 ```
 <h1>Usage</h1>
 
-Initial launch of the world
-```
-$ cd ~/catkin_ws/
-$ source devel/setup.bash
-$ roslaunch iris_coastline iris_coastline.launch
-```
-Open a second terminal and launch SITL through the scripts file in the repo:
-```
-$ cd ~/ardupilot/ArduCopter/
-$ sim_vehicle.py --mavproxy-args="--streamrate=30" --console --map -v ArduCopter -f gazebo-iris
-```
-Open a third terminal and launch mavros:
-```
-$ cd ~/catkin_ws
-$ source devel/setup.bash
-$ roslaunch mavros apm.launch
-```
+1rst terminal (Start the world with robots):
+
+1) (move to the folder where the world iris_coastline.launch is located)
+   ``` cd ~/simulator_ws  ```
+
+3) (declare the address in the terminal with the source prefix)
+   ``` source devel/setup.bash  ```
+ ` 
+5) (start the iris_coastline.launch startup which is in the package iris_coastline package with the roslaunch option)
+``` roslaunch iris_coastline iris_coastline.launch ```
+
+2nd terminal (Start SITL) :
+
+1) move to the folder where the start of the autopilot of the quadrotor
+``` cd ~/ardupilot/ArduCopter/ ```
+
+2) (gazebo-iris : the quadrotor's model, ArduCopter: in the folder where quadrotor is in, --mavproxy-args="--streamrate=30: messages that sent at a frequency of 30 hz, sim_vehicle.py: the python program that the autopilot runs.
+``` sim_vehicle.py --mavproxy-args="--streamrate=30" -console --map -v ArduCopter -f gazebo-iris ```
+
+3rd terminal (Start MAVROS):
+
+1) move to the folder where the mavros root is located
+   ``` cd ~/csl_uav_simulator_ws ```
+
+3) source devel/setup.bash
+(declare the address in the terminal with the source prefix)
+4) roslaunch mavros apm.launch
+(start the apm.launch startup found in the mavros package with
+roslaunch command)
+
 These three terminals launch the sandislad world with the iris quadcopter, the SITL (both communication, telemetry, console and map) and the mavros communcations. If everyhting are launched succesfuly then you will have topics both from the ZED stereo camera.
